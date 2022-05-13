@@ -62,3 +62,20 @@ def post_rooms( request,Item:Rooms_Model) :
 
         loggings.info(" Post Rooms API is Sucessfull")
         return {"result":output}
+
+@api.post("/post_employee")
+def post_employee( request,Item:Employees_Model) :
+        loggings.info(" Post Employee API called")
+        
+        email=Item.email
+        name=Item.name
+        sql_raw=Employee.objects.raw('INSERT INTO api_Employee (email,name )  VALUES (%s,%s  )', [email ,name])
+        try:
+            for k in sql_raw:
+                pass
+        except:
+            pass
+        output="Employee "+str(name)+" is created"
+        
+        loggings.info(" Post Employee API is Sucessfull")
+        return {"result":output}
