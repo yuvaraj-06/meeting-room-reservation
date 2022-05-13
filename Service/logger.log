@@ -1,1 +1,23 @@
-2022-05-13 12:59:51,304 Not Found: /
+2022-05-12 16:12:53,001 Get Employee API called
+2022-05-12 16:12:53,001 Get Employee API is Sucessfull
+2022-05-12 16:13:34,054 Post Reservations  API is Called
+2022-05-12 16:13:34,054 All Rooms are Available So Allocating The First Room
+2022-05-12 16:13:34,086  Post Reservations API is Sucessfull
+2022-05-12 16:13:53,943 Post Filter Employee API is Called
+2022-05-12 16:13:53,943  Reservations Found by this employee
+2022-05-12 16:13:53,959  Post Filter Employee is Sucessfull
+2022-05-12 16:14:12,359 Post Reservations  API is Called
+2022-05-12 16:14:12,359 All Rooms are Available So Allocating The First Room
+2022-05-12 16:14:12,391  Post Reservations API is Sucessfull
+2022-05-12 16:14:16,881 Post Filter Employee API is Called
+2022-05-12 16:14:16,881  Reservations Found by this employee
+2022-05-12 16:14:16,889  Post Filter Employee is Sucessfull
+2022-05-12 16:14:29,032 Post Filter Employee API is Called
+2022-05-12 16:14:29,032  Reservations Found by this employee
+2022-05-12 16:14:29,040  Post Filter Employee is Sucessfull
+2022-05-12 16:14:48,841  Post Cancel_Reservations API is Called
+2022-05-12 16:14:48,841 No Reservations Made By This User is Found 
+2022-05-12 16:14:48,841  Post Cancel_Reservations API is Sucessfull
+2022-05-12 16:14:56,298  Post Cancel_Reservations API is Called
+2022-05-12 16:14:56,298  Reservations Made By This User is Found 
+2022-05-12 16:14:56,322  Post Cancel_Reservations API is Sucessfull
