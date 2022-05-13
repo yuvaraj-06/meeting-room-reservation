@@ -80,6 +80,28 @@ def post_employee( request,Item:Employees_Model) :
         loggings.info(" Post Employee API is Sucessfull")
         return {"result":output}
 
+
+def helper(emp_id,from_time):
+          
+        sql_raw_1=Reservations.objects.raw('SELECT * FROM api_Reservations WHERE User_id = %s AND from_date= %s',[emp_id,from_time])
+        
+    
+        for i in sql_raw_1:
+            
+            bid=i.booking_id
+            tm=i.invites.split(",")
+            
+            for o in tm:
+                
+                
+                sql_raw_2=Reservations.objects.raw('INSERT INTO api_Bookings (User_id,booking_id) VALUES (%s,%s)',[o,bid])
+                try:
+                    
+                    for k in sql_raw_2:
+                       pass
+                except:
+                    pass
+
 @api.post("/filter_reservation_by_employees")
 def filter_employee(request, employee_email:str) :
  
@@ -110,3 +132,93 @@ def filter_employee(request, employee_email:str) :
         loggings.info(" Post Filter Employee is Sucessfull")
        
         return {"result":all}
+
+@api.post("/reserve_room")
+def reserve_room( request,Item:Reservations_Model) :
+    
+        loggings.info("Post Reservations  API is Called")
+        
+        emp_id=Item.User_id
+        title=Item.title
+        from_time=Item.from_date 
+        end_time=Item.end_date 
+        invites=Item.invites
+         
+        sql_raw=Reservations.objects.raw('SELECT * FROM api_Reservations WHERE from_date<=%s AND %s<=end_date OR from_date<=%s AND %s<=end_date',[from_time,from_time,end_time,end_time])
+        rows=[]
+        for i in sql_raw:
+           
+            rows.append(i.Room_id)
+       
+        sql_raw_1=Rooms.objects.raw("SELECT * FROM api_Rooms")
+        lp=[]
+        for i in sql_raw_1:
+          
+            lp.append(i.room_no)
+        
+        if rows==[]:
+            
+            loggings.info("All Rooms are Available So Allocating The First Room")
+            
+            sql_raw_2=Reservations.objects.raw("INSERT INTO api_Reservations (User_id,Room_id,from_date,end_date,title,invites) VALUES (%s,%s,%s,%s,%s,%s)",[emp_id,lp[0],from_time,end_time,title,invites])
+            try:
+                for k in sql_raw_2:
+                    pass
+            except:
+                pass
+
+            sql_raw_3=Reservations.objects.raw('SELECT * FROM api_Reservations WHERE User_id = %s AND from_date= %s',[emp_id,from_time])
+            k=[]
+            for i in sql_raw_3:
+                k.append(i.booking_id)
+            
+            k=k[0]
+            sql_raw_4=Reservations.objects.raw('INSERT INTO api_Bookings (User_id,booking_id) VALUES (%s,%s)',[emp_id,k])
+            try:
+                for k in sql_raw_4:
+                    pass
+            except:
+                pass
+            
+            helper(emp_id,from_time)
+            
+            loggings.info(" Post Reservations API is Sucessfull")
+            
+            return {"result":"Reservations has been Successful"}
+        
+        else:
+        
+            ans=(list(set(lp)-set(rows)))
+            if ans==[]:
+                
+                loggings.info("No Rooms are Available ")
+                
+                return {"result":"Reservations has been Unsuccessful , Please Try With Differnet From and End Date "}
+            
+            loggings.info(" Rooms are Available ")
+            
+            sql_raw_5=Reservations.objects.raw("INSERT INTO api_Reservations (User_id,Room_id,from_date,end_date,title,invites) VALUES (%s,%s,%s,%s,%s,%s)",[emp_id,ans[0],from_time,end_time,title,invites])
+            try:
+                for k in sql_raw_5:
+                    pass
+            except:
+                pass
+            
+            sql_raw_6=Reservations.objects.raw('SELECT * FROM api_Reservations WHERE User_id = %s AND from_date= %s',[emp_id,from_time])
+            k=[]
+            for i in sql_raw_6:
+                k.append(i.booking_id)
+            
+            k=k[0]
+            sql_raw_7=Reservations.objects.raw('INSERT INTO api_Bookings (User_id,booking_id) VALUES (%s,%s)',[emp_id,k])
+            try:
+                for k in sql_raw_7:
+                    pass
+            except:
+                pass
+            
+            helper(emp_id,from_time)
+            
+            loggings.info(" Post Reservations API is Sucessfull")
+            
+            return {"result":"Reservations has been Successful"}
