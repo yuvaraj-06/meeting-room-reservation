@@ -45,11 +45,14 @@ Also, To Run Unit Tests that are created
 ```
 python manage.py test test
 ```
-
 Check Logger File  ,
 ```
-
 logger.log
+```
+While Testing API the authorizations will ask username and password ,
+```
+username : admin
+password : admin
 
 ```
 
@@ -61,7 +64,7 @@ Docker build -t "dockername:tag" .
 Docker run -p 8000:8000 "dockername:tag"
 ```
 
-Now, visit localhost:8000/api/docs/ to access the api. Create a Auth token and access the api routes and use them as per your requirements 
+Now, visit <b>localhost:8000/api/docs/</b> to access the api. 
 
 # API Usage Screenshots
 
