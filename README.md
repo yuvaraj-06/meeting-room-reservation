@@ -53,7 +53,13 @@ Now, visit localhost:8000/api/docs/ to access the api. Create a Auth token and a
 
 ## API Usage Screenshots
 
-![App](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App](https://github.com/yuvaraj-06/meeting-room-reservation/blob/main/screenshots/api.png)
 
-
+#### Authentication of the API
+<p float="left">
+  <img src="https://github.com/yuvaraj-06/meeting-room-reservation/blob/main/screenshots/auth.png?raw=true" width="400" />
+  <img src="https://github.com/yuvaraj-06/meeting-room-reservation/blob/main/screenshots/auth-1.PNG?raw=true" width="400" /> 
+  
+</p>
+ 
 
