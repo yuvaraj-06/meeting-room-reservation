@@ -9,7 +9,7 @@ from ninja.security import HttpBasicAuth
 import logging
 from collections import defaultdict
  
-logging.basicConfig(filename="newfile.log",
+logging.basicConfig(filename="logger.log",
                     format='%(asctime)s %(message)s',
                     filemode='w')
  
