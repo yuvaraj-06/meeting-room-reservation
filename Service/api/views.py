@@ -5,7 +5,7 @@ from .models import Employee,Rooms,Reservations,Bookings,Employees_Model,Rooms_M
 from .serializers import EmployeeSerializer,RoomsSerializer,ReservationsSerializer,BookingsSerializer
 from rest_framework.decorators import api_view 
 from ninja import NinjaAPI
-from ninja.security import HttpBearer
+from ninja.security import HttpBasicAuth
 import logging
 from collections import defaultdict
  
@@ -16,13 +16,15 @@ logging.basicConfig(filename="newfile.log",
 # Creating an object
 loggings = logging.getLogger()
 loggings.setLevel(logging.INFO)
-class GlobalAuth(HttpBearer):
-    def authenticate(self, request, token):
-        if token == "1":
-            return token
+class GlobalAuth(HttpBasicAuth):
+    def authenticate(self,  request, username, password):
+         
+     
+        if username == "admin" and password == "admin":
+            return username
 api = NinjaAPI(auth=GlobalAuth(),title="Meeting Room Reservations")
 
-@api.get("/get_rooms")
+@api.get("/get_rooms",auth=GlobalAuth())
 def get_rooms(request) :
 
     loggings.info("Get Rooms API called")
@@ -103,3 +105,41 @@ def reserve_room( request,Item:Reservations_Model) :
     res = reserve(emp_id,title,from_time,end_time,invites)
             
     return {"result":res}
+
+@api.post("/Cancel_Reservations")
+def Cancel_Reservations(request, employee_email:str,from_date:str,end_date:str) :
+        loggings.info(" Post Cancel_Reservations API is Called")
+        emp_id=employee_email
+        from_date= from_date 
+        end_date= end_date 
+        sa=Reservations.objects.raw('SELECT * FROM api_Reservations WHERE User_id  = %s AND from_date=%s AND end_date=%s ',[emp_id,from_date,end_date])
+        all=[]
+        k2=emp_id
+        k1=None
+        for i in sa: 
+                k1=i.booking_id
+            # k2=k2+","+i.invites
+                #print(k1,k2)
+        if k1!=None:
+            loggings.info(" Reservations Made By This User is Found ")
+            pa=Reservations.objects.raw('DELETE FROM api_Reservations WHERE booking_id=%s',[k1])
+            try:
+                for i in pa:
+                        print(i)
+            except:
+                    pass
+            
+            pa=Bookings.objects.raw('DELETE FROM api_Bookings WHERE booking_id=%s',[k1])
+            try:
+                for i in pa:
+                        print(i)
+            except:
+                    pass
+            loggings.info(" Post Cancel_Reservations API is Sucessfull")
+            return {"result":"Reservation Canceled Successfully"}
+        else:
+            loggings.info("No Reservations Made By This User is Found ")
+            loggings.info(" Post Cancel_Reservations API is Sucessfull")
+            return {"result":"No Meetings reserved with this user"} 
+
+ 
