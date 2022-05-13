@@ -41,6 +41,18 @@ Now, Run the service
 ```
 python manage.py runserver
 ```
+Also, To Run Unit Tests that are created
+```
+python manage.py test test
+```
+
+Check Logger File  ,
+```
+
+logger.log
+
+```
+
 
 #### Docker
 
