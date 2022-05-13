@@ -33,3 +33,15 @@ def get_rooms( request) :
         loggings.info("Get Rooms API is Sucessfull")
          
         return {"result":res}
+
+@api.get("/get_employee")
+def get_employee( request) :
+        loggings.info("Get Employee API called")
+        
+        sql_raw=Employee.objects.raw('SELECT  *  FROM api_Employee ')
+        res=[]
+        for k in sql_raw:
+           res.append([k.id,k.name,k.email])
+        loggings.info("Get Employee API is Sucessfull")
+        
+        return {"result":res}
