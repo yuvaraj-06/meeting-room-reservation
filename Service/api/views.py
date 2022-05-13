@@ -6,7 +6,16 @@ from .serializers import EmployeeSerializer,RoomsSerializer,ReservationsSerializ
 from rest_framework.decorators import api_view 
 from ninja import NinjaAPI
 from ninja.security import HttpBearer
-
+import logging
+ 
+ 
+logging.basicConfig(filename="newfile.log",
+                    format='%(asctime)s %(message)s',
+                    filemode='w')
+ 
+# Creating an object
+loggings = logging.getLogger()
+loggings.setLevel(logging.INFO)
 class GlobalAuth(HttpBearer):
     def authenticate(self, request, token):
         if token == "1":
