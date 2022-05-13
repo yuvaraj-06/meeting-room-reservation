@@ -79,3 +79,34 @@ def post_employee( request,Item:Employees_Model) :
         
         loggings.info(" Post Employee API is Sucessfull")
         return {"result":output}
+
+@api.post("/filter_reservation_by_employees")
+def filter_employee(request, employee_email:str) :
+ 
+        loggings.info("Post Filter Employee API is Called")
+        
+        emp_id=employee_email
+        sql_raw=Bookings.objects.raw('SELECT * FROM api_Bookings WHERE User_id  = %s',[emp_id])
+        all=[]
+        
+        try:
+            loggings.info(" Reservations Found by this employee")
+            
+            for i in sql_raw: 
+                    
+                    k1=i.booking_id
+                    sql_raw_1=Reservations.objects.raw('SELECT * FROM api_Reservations WHERE booking_id = %s',[k1])
+                    for k in sql_raw_1: 
+                        
+                        all.append([k.booking_id,k.User_id,k.Room_id,k.from_date,k.end_date,k.title,k.invites ])
+        
+        except:
+            
+            loggings.info("No Reservations made by this employee or he is not the host of the meet")
+            loggings.info(" Post Filter Employee is Sucessfull")
+            
+            return {"result":"No Reservations made by this employee "}
+        
+        loggings.info(" Post Filter Employee is Sucessfull")
+       
+        return {"result":all}
