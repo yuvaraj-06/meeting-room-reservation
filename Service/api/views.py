@@ -21,3 +21,15 @@ class GlobalAuth(HttpBearer):
         if token == "1":
             return token
 api = NinjaAPI(auth=GlobalAuth(),title="Meeting Room Reservations")
+
+@api.get("/get_rooms")
+def get_rooms( request) :
+        loggings.info("Get Rooms API called")
+        
+        sql_raw=Rooms.objects.raw('SELECT * FROM api_Rooms')
+        res=[]
+        for k in sql_raw:
+            res.append(k.room_no)
+        loggings.info("Get Rooms API is Sucessfull")
+         
+        return {"result":res}
