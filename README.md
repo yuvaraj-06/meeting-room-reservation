@@ -51,15 +51,52 @@ Docker run -p 8000:8000 "dockername:tag"
 
 Now, visit localhost:8000/api/docs/ to access the api. Create a Auth token and access the api routes and use them as per your requirements 
 
-## API Usage Screenshots
+# API Usage Screenshots
 
 ![App](https://github.com/yuvaraj-06/meeting-room-reservation/blob/main/screenshots/api.png)
 
-#### Authentication of the API
-
+## Authentication of the API
 <p float="left">
   <img src="https://github.com/yuvaraj-06/meeting-room-reservation/blob/main/screenshots/auth.png?raw=true" width="400" />
   <img src="https://github.com/yuvaraj-06/meeting-room-reservation/blob/main/screenshots/auth-1.PNG?raw=true" width="400" /> 
   
 </p>
+
+## GET & POST Routes for Meeting Rooms
+
+<p float="left">
+  
+  <img src="https://github.com/yuvaraj-06/meeting-room-reservation/blob/main/screenshots/post_room.PNG?raw=true"    /> 
+  <img src="https://github.com/yuvaraj-06/meeting-room-reservation/blob/main/screenshots/get_room.png?raw=true"   />
+  
+</p>
+
+## GET & POST Routes for Employees 
+
+<p float="left">
+  
+  <img src="https://github.com/yuvaraj-06/meeting-room-reservation/blob/main/screenshots/post_emp.PNG?raw=true"    /> 
+  <img src="https://github.com/yuvaraj-06/meeting-room-reservation/blob/main/screenshots/get_emp.png?raw=true"   />
+  
+</p>
  
+## POST Routes for Making Reservation  
+
+<p float="left">
+  
+  <img src="https://github.com/yuvaraj-06/meeting-room-reservation/blob/main/screenshots/post_res.png?raw=true"    /> 
+  
+</p>
+
+## POST Routes for  Filter Reservations by Employee and Canceling Reservation  
+
+<p float="left">
+   <img src="https://github.com/yuvaraj-06/meeting-room-reservation/blob/main/screenshots/post_filter.png?raw=true"    /> 
+  <img src="https://github.com/yuvaraj-06/meeting-room-reservation/blob/main/screenshots/post_cancel.png?raw=true"    /> 
+   
+ 
+ 
+</p>
+
+ 
+
