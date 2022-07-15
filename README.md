@@ -1,5 +1,5 @@
 
-# Corner Case Technologies - API Assignment
+
 
 ## Meeting Room Reservation API using Django
 [![Corner Case Technologies|Django](https://www.cornercasetech.com/static/e5a3f47a3b77fdf490df90d88ff4155c/93826/header-cct-logo.webp)](https://www.cornercasetech.com/)
